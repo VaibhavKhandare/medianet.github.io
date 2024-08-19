@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samurai Link</title>
+    <style>
+        @font-face {
+  font-family: 'Inter';
+  src: url('path-to-your-fonts/__Inter_36bd41.woff2') format('woff2'),
+       url('path-to-your-fonts/__Inter_36bd41.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+        body {
+            font-family: 'Inter',Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            font-weight: 500;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+
+        .tab-container {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .tabs {            
+            padding: 0.25rem;
+            display: flex;
+            background-color: #f5f5f5;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 6px 12px; 
+            text-align: center;
+            cursor: pointer;
+            border-bottom: 0;
+            transition: background-color 0.3s;
+            height: 20px;
+            color: hsl(240 3.8% 46.1%);
+
+        }
+
+        .tab.active {
+            background-color: hsl(0 0% 100%);
+            border-radius: 0.5rem;
+            color: hsl(240 10% 3.9%);
+
+            font-weight: 550;
+        }
+
+        iframe {
+            width: 100%;
+            height: 90vh;
+            border: none;
+        }
+
+        .tab-content {
+            border-top: 0;
+        }
+
+        .tab-pane {
+            display: none;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        .nested-tabs {
+            margin-top: 10px;
+            background-color: #f5f5f5;
+        }
+
+        .nested-tabs-nav {
+            display: flex;
+            cursor: pointer;
+            padding: 0.25rem;
+        }
+
+        .nested-tab {
+            flex: 1;
+            padding: 6px 12px; 
+            text-align: center;
+            border-bottom: 0;
+            background-color: transparent;
+            transition: background-color 0.3s;
+            color: hsl(240 3.8% 46.1%);
+
+        }
+
+        .nested-tab.active {
+            border-radius: 0.5rem;
+            background-color: hsl(0 0% 100%);
+            font-weight: 550;
+            color: hsl(240 10% 3.9%);
+        }
+
+        .nested-tabs-content {
+            border-top: 0;
+        }
+
+        .nested-tab-pane {
+            display: none;
+        }
+
+        .nested-tab-pane.active {
+            display: block;
+        }
+
+
+.container {
+  display: grid;
+  gap: 10px;
+  width: 80vw;
+  max-width: 1000px;
+}
+
+.textarea {
+  width: 100%;
+  height: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+    </style>
+</head>
+<body>
+
+<div class="tab-container">
+    <div class="tabs">
+        <div class="tab active" data-tab="tab1">General</div>
+        <div class="tab" data-tab="tab2">APPRRA</div>
+        <div class="tab" data-tab="tab3">NBR</div>
+        <div class="tab" data-tab="tab4">Utilty</div>
+    </div>
+    <div class="tab-content">
+        <div id="tab1" class="tab-pane active">
+            <div class="nested-tabs">
+                <div class="nested-tabs-nav">
+                    <div class="nested-tab active" data-nested-tab="nested1-1">CRTO</div>
+                    <div class="nested-tab" data-nested-tab="nested1-2">To be added</div>
+                    <div class="nested-tab" data-nested-tab="nested1-3">To be added</div>
+                    <div class="nested-tab" data-nested-tab="nested1-4">To be added</div>
+                </div>
+                <div class="nested-tabs-content">
+                    <div id="nested1-1" class="nested-tab-pane active">
+                        <iframe src="https://samurai.access.mn/#/reporting/Header%20Bidder?bz=0&cs=gw&gd=NobwRALgngDgpmAXGA5gJwPYFd4BMAiAlgLZwB2AzoRmWADRi4CGETAKrAshRGoWSnphCuJGADCTMkzRQhAGyYAjOPLGTpsoYQriMxYjSS8scBtggwsEAHJNS6qTLkMAZoXkQ4aAOKYcFEigYBZWtvZcEjS8GGpuHl5oSODQ8GL8Qu6e3hxpyPI6EEK4JORURsgA6nBKAAQAyt4Abt61AJIwxSxMQWCGAO4AHgC0AKyjAJyuE7hKSgAsAOzD8wBs8gBW%2FUIDI%2BNTM3NLKwBeFBQAjjsYQ2OT07MLy5MUq6tgALoMTUzypoGIYB9G57e6HJ4rdZba63fYPI7LeZnS4w0EHR7HF5vT4AXxxdHAoWsdgcyDYcB4mQS3mSkE46Vo8WyaFykQKlIYJVIlGotCqNQazVaHS6rF6u2GAA4lBNJRMAMbzeUTMYwFAAJmIqKlMrliuVw1WTXm6pO2ulsoVSpVq3VAGt5oEvmAfn8KeKQTrLfqVaM1ZrzbqrQajSazQwJRa9dbDfbHbicc6uWVeWJqnVGmgWmh2p1E0A%3D%3D&heatMapType=off&ia=0&il=0&iscum=0&isout=0&isst=0&ist=0&mopt=N4IgkgdgLgpgThAhgGwAQBUCWBbGB7AVylQFJUAKACQCFUBBAgYykzwlQAVE4XHMAHRNADOAShAAuUP0khkbAOYgANCABusgHIqQAE0kAmVYlnIYAMyggAvtaA%3D%3D&namespace=Header%20Bidder&pc=1&selection=N4IgZglgNgLgpgJwM4gFwG1RQIYCM5RogAqEAtnCADQgwCeADpaiACblwB2SEA9t9RARWRUhUGtsMbMUbNaHQfDIM0YbFCRwaEJAGFeZMvzQwEAV21sp2NKGm4iCAlIgA3SjQDmCBgElOVjgADzQABh1AkPCaBmc3PnN9XnNOGDROcygoGgB3ODgAawMVbGc7azoMrKgAXxoAY0MGMt1%2BWSYiSToSlvLa2oBdGgReXJQMezkujm4%2BARpJaQ75JDMITi9BYSIAERsAAgaueARBHHxCFn3pI5PEbeSjE1QzS0inMZQaGAALZyQv14UBEqAArPVQDsWG4NJYkAAFHDHIEgh4fFijcYgSEgC4EUSKH7TFjsChzfjfISgkhE6zLEkKcQ6J7GTimCxWJa2VCgHzYTI4BAQehoABsYUlYXqQnZmK%2BOOGICaUHMZAEGCVsNVcAmmGpRACp04GgOYjgKRgBwApAcABQACQAQgcAILmBoweYHBFlL0NCAtNJIACU5zwBJYRsQJqgZo4lptSjwUHkzrdHq9%2FB9fogAaDMCpuldHgQ2C8zHUmis9E6LAo2CQ5gBipoWlTnrgrAAahA4LkiFANnAjr8%2FYIGkkYIYALJwRvN3VodBKyCwRBducLluami%2FXTT%2FlkXbkZdK3gIIIIJ1VFiCC9XjZeFZdXUNHFAA%3D&showOthers=0&sya=1&tables=HB%20Auction%20Participants&timezone=Asia%2FKolkata"></iframe>
+                    </div>
+                    <div id="nested1-2" class="nested-tab-pane">
+                        To be added
+                    </div>
+                    <div id="nested1-3" class="nested-tab-pane">
+                        To be added
+                    </div>
+                    <div id="nested1-4" class="nested-tab-pane">
+                        To be added
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2 Content -->
+        <div id="tab2" class="tab-pane">
+            <div class="nested-tabs">
+                <div class="nested-tabs-nav">
+                    <div class="nested-tab active" data-nested-tab="nested2-1">EAST_SC</div>
+                    <div class="nested-tab" data-nested-tab="nested2-2">WEST_OR</div>
+                    <div class="nested-tab" data-nested-tab="nested2-3">APAC_SG</div>
+                    <div class="nested-tab" data-nested-tab="nested2-4">EU_BE</div>
+                </div>
+                <div class="nested-tabs-content">
+                    <div id="nested2-1" class="nested-tab-pane active">
+                        <iframe src="https://samurai.access.mn/#/reporting/Header%20Bidder?bz=0&cs=gw&heatMapType=off&ia=0&il=0&iscum=0&isout=0&isst=0&ist=0&mopt=N4IgkgtgDgTgpgZwQSwPYDsEAIAicA2yAbnPACZYAUAEgEJYBKc6ZpcFAgmQJQgBcoKPxD4MAcxAAaEEWEA5KSDL8ATNICGw%2FHABmAFxABfaQAUYqIslYwsAZVF6skWIhQZsNehwCuAYz1o6Fgm6jABvshQ6uh6CLwCIEJ8IuKKsskK0sp8aiCaydr6RtJMCFDuiFR0weaW1oyI5Zhw8YJaqdLpIJlKqhpaugbGIExEjOp6cPxtBR0y8orZufkig8XdcHoA7qgwANZYAOrIQQwTUwlJKegSnQtZfXkDRcNmFlakRyfjk9OJ7Tc0vdejl%2BgU1sMAKIAD0mMHQ6nwWB8%2FkCX3QAFI%2FldRIC7hlFo8VoUhqZzDpkI4zr9LgDbvMCQ9QU9wS9DEA&namespace=Header%20Bidder&pc=1&selection=N4IgZglgNgLgpgJwM4gFwG1RQIYCM5RogAqEAtnCADQgwCeADpaiACblwB2SEA9t9RARWRUhUGtsMbMUbNaHQfDIM0YbFCRwaEJAGFeZMvzQwEAV21sp2NKGm4iCAlIgA3SjQDmCBgElOVjgADzQABh1AkPCaBmc3PnN9XnNOGDROcygoGgB3ODgAawMVbGc7azoMrKgAXxoAY0MGMt1%2BWSYiSToSlvLa%2Bvs5Lo5uPgEaSWkO%2BSQzCE4vQWEiABEbAAIGrngEQRx8QhZ16S2dxGXkoxNUM0tIokhYRBRJmwr6TpYFwSfdmaICwaUHMQQkox4NxAJ2wZzSFze0jQ6BAcGwcwA%2BkgGiAALo0NwaSwoDCo9EwLE43EDKhDL5sCHjV7WabDFhzBALJY6EQsADqcFwGwAyogPAgNn5VDQDgQiAKhaKEOLJdKhFdjJxTBYrD8WH8XhJ3qg6fIfjQDQgASwoLp0pNGVCFSKxYhVUakaTjLlggBaObYLxc30AZgAHABGCO%2B7CsVi%2BkIwGOcTi8aQwcaCb1%2BgDsAE48zmAGwAVhLYYALCXfQAvEsIFNZ3g%2B335wul8tV33BNwVgCOuSbLbbxbLlerwUKXiQhSHfoDQcWvrCACYI3nfc5jB5fU14cEYGRsAxfYU4HQUPiQISQXASSjs%2F7pIuvKHI9HY%2FHE8nU%2BnMzRHxHDtx1retGwA5tcwLUdOwnXsBznVtoOArtJ2nWcIJbBdg1XddNzgbc4F3fh4API8TzPC88QGK8EGbe9QBWFgb2JAAFHBtgAC14KAgj2B4WDo3IUEGWg2QZCgxn4ZkphkcSOS5ZZeRAZ0lRVKV9jwOV%2BUFF1lTdDSdA1G47l1LVBPopROOcJBuN4tAS1E2UjhIRQaE%2BeR2EkyEJiEZSxE8Fk5PpDNxCMkpNW1e4goqHxsEyHBOXoNAizCNKwnqIRzJAISRKvJoQTIAQMCvFi72RRjlL8FQbJ8pANlWAh3EQOBWA2AAKAAJAAhDYACUuD41qNgAQVYABKTTDiIaq4jvOqGqa8VWqUPAoHkHr%2BsGlq2rGy4RvFQNmHUTQrA8ogKHRcwbJAUSmJAVi6ISPiRSgNNJRq%2BamQ6zaRvMBoM34DZWLKDMGggFo0iQSaZS0lzHt4Z63WFN6YA%2BuakDq1bcHWohfv%2BwHOGB0GIHByGYGZXQDsQI61A0LR3PEy6kGu8q7uUgakAYaS7x%2B3qEaRiVOe57g4BhkBnKIYWeeZBxcZYTaBeEN1pdF%2FbDq8Y76bOpm0RZm72aIdr2oAEmAbrhGBzltj5raomcXaJtqDYACoNgjdL0vGjYAHoNjNpWXpR97Ztq76ut6v6AfGYmEDBiH4op8banFyWWAGtx%2BqkQLzpYThsAoLnsG2ABZPXWdu2k%2FKNs3Q6%2B6TFttZa2oju2hsd5Pff94BVa0erW8DlW7xFrRk%2B9t2PbCKbtJAAA5OAYFyXgEEKDY%2BQWLP4CUcT88LlpS%2FL%2Foq%2Fu03gDrzHvsapudttgb7eGsbO79gOnuViVg7R8%2BFtbqPCdj%2BPybQxTq7d2aVp7w1fi9deRM%2BrZ23vSXew9i5wDLldI%2BlUa5n0%2BhfBuV9moO1vttAhj9nbPzPnybqEZgbCj8LbX%2BMcQZx1JgnKGY8QGT3AUQAAogeRA%2BcoCjQJjHaBABSeB8hEFFwPmgyghsWDG1PhbNqj1SZwEIffDuztfTdz0EkGAhg3RKKtqo9R7dRpO3HqAz2YRvZkMHu%2FVG6Mw4Nx%2FkIoGjCAGJyAanOGRAEaQDRrArejMEEFyQdI%2FWsirxaHWgDVqAA1CAcBBw2gWGohonFQaCAaHowwqDIn3ivJaVq%2BTWaFJoJxO0vA4pkFWOQZEV5l58W6lUFgggmmIC5NaNgd4cS1CAA&showOthers=0&sya=1&tables=HB%20Rendered%20Ad%2CHB%20Auction%20Participants%2CHB%20Provider%20Response&timezone=Asia%2FKolkata"></iframe>
+                    </div>
+                    <div id="nested2-2" class="nested-tab-pane">
+                        <iframe src="https://samurai.access.mn/#/reporting/Header%20Bidder?bz=0&cs=gw&heatMapType=off&ia=0&il=0&iscum=0&isout=0&isst=0&ist=0&mopt=N4IgkgtgDgTgpgZwQSwPYDsEAIAicA2yAbnPACZYAUAEgEJYBKc6ZpcFAgmQJQgBcoKPxD4MAcxAAaEEWEA5KSDL8ATNICGw%2FHABmAFxABfaQAUYqIslYwsAZVF6skWIhQZsNehwCuAYz1o6Fgm6jABvshQ6uh6CLwCIEJ8IuKKsskK0sp8aiCaydr6RtJMCFDuiFR0weaW1oyI5Zhw8YJaqdLpIJlKqhpaugbGIExEjOp6cPxtBR0y8orZufkig8XdcHoA7qgwANZYAOrIQQwTUwlJKegSnQtZfXkDRcNmFlakRyfjk9OJ7Tc0vdejl%2BgU1sMAKIAD0mMHQ6nwWB8%2FkCX3QAFI%2FldRIC7hlFo8VoUhqZzDpkI4zr9LgDbvMCQ9QU9wS9DEA&namespace=Header%20Bidder&pc=1&selection=N4IgZglgNgLgpgJwM4gFwG1RQIYCM5RogAqEAtnCADQgwCeADpaiACblwB2SEA9t9RARWRUhUGtsMbMUbNaHQfDIM0YbFCRwaEJAGFeZMvzQwEAV21sp2NKGm4iCAlIgA3SjQDmCBgElOVjgADzQABh1AkPCaBmc3PnN9XnNOGDROcygoGgB3ODgAawMVbGc7azoMrKgAXxoAY0MGMt1%2BWSYiSToSlvLa%2Bvs5Lo5uPgEaSWkO%2BSQzCE4vQWEiABEbAAIGrngEQRx8QhZ16S2dxGXkoxNUM0tIokhYRBRJmwr6TpYFwSfdmaICwaUHMQQkox4NxAJ2wZzSFze0jQ6BA%2BTmAH1eHsALo0NwaSwoDCouAYrEgbEDKhDL5sCHjV7WabDFhzBALJY6EQsADqcFwGwAyogPAgNn5VDQDgQiHyBcKEKLxZKhFdjJxTBYrD8WH8XhJ3qgafIfjQ9QgASwoLp0pN6VC5UKRYhlQakcTjLlggBaObYLwc70AZgAHABGMPe7CsVjekIwKOcTi8aQwcaCT0%2BgDsAE4c1mAGwAViLIYALEXvQAvIsIJMZ3he725%2FPF0sV73BNxlgCOuQbTZbhZL5crwUKXiQhQHPr9AcW3rCACYwznvc5jB5vU14cEYGRsAxvYU4HQULiQPiQaTkSBM77pPOvMHw5Ho7H44nk6n0zR70O21Hata3rP9G2zPNh3bMduz7Gdm0gwCO3HSdpzAps50DZdV3XOBNzgbd%2BHgPcDyPE8zwpAYLwQRsiUwIRuUvAlSQABRwbYAAteCgII9geFgaNyFBBloFk6QoMZ%2BEZKYZDEtkOWWRjHQVJUJX2PAZV5fknUVF01J0NUbjubUNQE2ilA45wkC4ni0CLETpSOEhFBoT55HYCTIQmBjRBcplZNpNNxAMkp1U1e5%2FIqHxsEyHB2XoNACzCZKwnqIRTJAQThIvJoQTIAQMAvK9CWRUAVhYPwVCsrykA2VYCHcRA4FYDYAAoAAkACENgAJS4Xjmo2ABBVgAEp1MOIhKriUkarqhrRWapQ8CgeQut6%2FqmpakbLiG0V%2FWYdRNCsNyiAobAkHMKyQBE8qQBYmiEl4oUoBTcUqtmhk2vWobzAaNN%2BA2FiyjTBoIBaNIkHGqUNKch7eCel1BVemB3pmpAauW3BVqIH6%2FoBzggZBiAwYhmBGV0PbEAOtQNC0VyxPOy7rtuxi%2BqQBgpNJb7uvhxGxXZznuDgaGQEcohBa5xkHBxlh1r54QXUl4Xdv2rxDrpk7GbgC6rpvVmiFa1qABJgE64QgfZbYeY2qJnG2sbag2AAqDYwxSlLRo2AB6DZTYV57kbe6bqq%2Bjrut%2B%2F7xiJhBQfBmLydG2pRfFlg%2BrcXqpE8UTaU4bAKA57BtgAWR15nKANlgTeAEPPqk%2BbrUWlrw9tgaHaTn2%2FeAZWtFqluA6V0kha0JOvdd92wgmzSQAAOTgGBcixQoNh5BZM%2FgJQxLzguWhLsu9Zu6kfKr03a4xr76sbrabb6u3BpGjvff9x7FbFIPUbPuaW8jgmY7jsmobJxdm7ZKU84Yv2eqvQmPUs6b1zvnIeRc4Cl11v0I%2Bd1q6fwvgta%2BLdb5t2Go7Tup8eSdTDEDQUfgbY%2F2jsDWOJN46Q1HsAieYCiAAFE9yIDzlAYa%2BNo5QIAKRwPkNvRBe9UEV3QYxI21dzYtQeiTOAN9Nr20IR3b0Xc9BJBgIYF08jLZKJUXfduQDx4e2Sl7J%2BwAB5vxRmjUO9dv78MBnQ%2F%2BCdAEp1hkQeGkBUYwI3gzeBO8kEoPLjdC8WhVr%2FWagANQgHAfsVoFjKIaBxEGggGg6MMGEvWdELzmmark66hUaAcRtLwaKZBVjkGRBeLEvFOpVBYIIBpiAOSWjYKSBoN0gA&showOthers=0&sya=1&tables=HB%20Rendered%20Ad%2CHB%20Auction%20Participants%2CHB%20Provider%20Response&timezone=Asia%2FKolkata"></iframe>
+                    </div>
+                    <div id="nested2-3" class="nested-tab-pane">
+                        <iframe src="https://samurai.access.mn/#/reporting/Header%20Bidder?bz=0&cs=gw&heatMapType=off&ia=0&il=0&iscum=0&isout=0&isst=0&ist=0&mopt=N4IgkgtgDgTgpgZwQSwPYDsEAIAicA2yAbnPACZYAUAEgEJYBKc6ZpcFAgmQJQgBcoKPxD4MAcxAAaEEWEA5KSDL8ATNICGw%2FHABmAFxABfaQAUYqIslYwsAZVF6skWIhQZsNehwCuAYz1o6Fgm6jABvshQ6uh6CLwCIEJ8IuKKsskK0sp8aiCaydr6RtJMCFDuiFR0weaW1oyI5Zhw8YJaqdLpIJlKqhpaugbGIExEjOp6cPxtBR0y8orZufkig8XdcHoA7qgwANZYAOrIQQwTUwlJKegSnQtZfXkDRcNmFlakRyfjk9OJ7Tc0vdejl%2BgU1sMAKIAD0mMHQ6nwWB8%2FkCX3QAFI%2FldRIC7hlFo8VoUhqZzDpkI4zr9LgDbvMCQ9QU9wS9DEA&namespace=Header%20Bidder&pc=1&selection=N4IgZglgNgLgpgJwM4gFwG1RQIYCM5RogAqEAtnCADQgwCeADpaiACblwB2SEA9t9RARWRUhUGtsMbMUbNaHQfDIM0YbFCRwaEJAGFeZMvzQwEAV21sp2NKGm4iCAlIgA3SjQDmCBgElOVjgADzQABh1AkPCaBmc3PnN9XnNOGDROcygoGgB3ODgAawMVbGc7azoMrKgAXxoAY0MGMt1%2BWSYiSToSlvLa%2Bvs5Lo5uPgEaSWkO%2BSQzCE4vQWEiABEbAAIGrngEQRx8QhZ16S2dxGXkoxNUM0tIokhYRBRJmwr6TpYFwSfdmaICwaUHMQQkox4NxAJ2wZzSFze0jQ6BA2BaDQA%2BkglgBdGhuDSWFAYVHorG4gZUIZfNgQ8avazTYYsOYIBZLHQiFgAdTguA2AGVEB4EBs%2FKoaAcCERefyhQgRWKJUIrsZOKYLFYfiw%2Fi8JO9UNT5D8aLqEACWFBdOlJnSobLBcLEEr9UiScZcsEALRzbBedlegDMAA4AIyhr3YVisL0hGCRzicXjSGDjQQe70AdgAnNnMwA2ACsheDABZC16AF6FhCJ9O8T1enN5osl8te4JuUsAR1y9cbzYLxbLFeChS8SEK%2Fe9vv9iy9YQATKHs17nMYPF6mvDgjAyGivYU4HQUHiQASQXBiSiMz7pHOvEGwxGozG4wmkym0zRb4PWyOqxrOsfwbLNcyHNtRy7XtpybcD%2F3bMcJynEDG1nAMlxXNc4A3OAt34eBd33BhD2PU8BjPBAG2vUAVhYC8iQABRwbYAAteCgII9geFgqNyFBBloZlaQoMZ%2BAZKYZGE1l2WWLkQAdeVFXFfY8GlHk%2BUdBVnRUnRVRuO4tXVXjqKUVjnCQdjOLQQtBKlI4SEUGhPnkdhRMhCYhHksRPEZKSaVTcQ9JKNUNXuPyKh8bBMhwNl6DQfMwiSsJ6iEYyQD4gSzyaEEyAEDAzwYq9kVo%2BS%2FBUCyPKQDZVgIdxEDgVgNgACgACQAIQ2AAlLguMajYAEFWAASlUw4iHKuIryqmq6pFRqlDwKB5A67reoapqhsuAaRT9Zh1E0KwXKIChsCQcwLJAQS6JARiqISLjBSgZMxQq6b6Ra1aBvMBpU34DZGLKVMGggFo0iQUbJTUhy7t4B7nQFZ6YFeqakCqxbcGWogvp%2Bv7OABoGIBBsGYAZXQdsQPa1A0LRnOE07zsu675J6pAGHEq9Ps62H4dFVn2e4OBIZAeyiH5jmGQcLGWFWnnhGdcXBe23avH2mmjvpuAzou4rmaIZrmoAEmAdrhABtlti5taomcTaRtqDYACoNlDZLkuGjYAHoNmNuXHsRl7Jsqj62s677fvGAmEGB0HotJ4bamF0WWB6txuqkXzjpYThsAoNnsG2ABZLXGcoPWWCN4Ag%2Fe8TZqteamtD62%2BrthOvZ94BFa0aqm79hWrwFrQE4953XbCMb1JAAA5OAYFyXgEEKDZuQWdP4CUYSc7z9E4GL7X%2BipLz9eN6u0Y%2B2r642q2ept%2Fqhrb73ffu%2BXRQD5HT5mpvw7xqOY5JiHE5OxdklCeMNn6PRXvjLqGcN40i3gPAuu8S46yuofG6lcP7nzmlfJuN8W6DXtu3E%2B3J2qhgBgKPwVtv6R0BtHImsdwbDyAWPUBRAACiu5EA5ygINXGkdIEAFJYHyHgfnIuyCD6lX1gbY2psmp3SJnAa%2B61bYELbl6DuegkgwEMM6OR5tFHKNvq3QBo83ZJQ9o%2FYAfdX5IxRsHWuX8%2BH%2FVoX%2FOOACk7QyILDSAyNoHrzpnA3OCDxH7zLmeLQy1fqNQAGoQDgH2S0CwlENFYkDQQDRtGGD3qXa8Z4zSNRyTrPJNBWLWl4FFMgqxyDIjPAvLi7UqgsEEPUxA7ILRsCvA0K6QA%3D%3D&showOthers=0&sya=1&tables=HB%20Rendered%20Ad%2CHB%20Auction%20Participants%2CHB%20Provider%20Response&timezone=Asia%2FKolkata"></iframe>
+                    </div>
+                    <div id="nested2-4" class="nested-tab-pane">
+                        <iframe src="https://samurai.access.mn/#/reporting/Header%20Bidder?bz=0&cs=gw&heatMapType=off&ia=0&il=0&iscum=0&isout=0&isst=0&ist=0&mopt=N4IgkgtgDgTgpgZwQSwPYDsEAIAicA2yAbnPACZYAUAEgEJYBKc6ZpcFAgmQJQgBcoKPxD4MAcxAAaEEWEA5KSDL8ATNICGw%2FHABmAFxABfaQAUYqIslYwsAZVF6skWIhQZsNehwCuAYz1o6Fgm6jABvshQ6uh6CLwCIEJ8IuKKsskK0sp8aiCaydr6RtJMCFDuiFR0weaW1oyI5Zhw8YJaqdLpIJlKqhpaugbGIExEjOp6cPxtBR0y8orZufkig8XdcHoA7qgwANZYAOrIQQwTUwlJKegSnQtZfXkDRcNmFlakRyfjk9OJ7Tc0vdejl%2BgU1sMAKIAD0mMHQ6nwWB8%2FkCX3QAFI%2FldRIC7hlFo8VoUhqZzDpkI4zr9LgDbvMCQ9QU9wS9DEA&namespace=Header%20Bidder&pc=1&selection=N4IgZglgNgLgpgJwM4gFwG1RQIYCM5RogAqEAtnCADQgwCeADpaiACblwB2SEA9t9RARWRUhUGtsMbMUbNaHQfDIM0YbFCRwaEJAGFeZMvzQwEAV21sp2NKGm4iCAlIgA3SjQDmCBgElOVjgADzQABh1AkPCaBmc3PnN9XnNOGDROcygoGgB3ODgAawMVbGc7azoMrKgAXxoAY0MGMt1%2BWSYiSToSlvLa%2Bvs5Lo5uPgEaSWkO%2BSQzCE4vQWEiABEbAAIGrngEQRx8QhZ16S2dxGXkoxNUM0tIokhYRBRJmwr6TpYFwSfdmaICwaUHMQQkox4NxAJ2wZzSFze0jQ6BAcHMAH18CAALo0NwaSwoDCojFY7EDKhDL5sCHjV7WabDFhzBALJY6EQsADqcFwGwAyogPAgNn5VDQDgQiDy%2BYKEMLReKhFdjJxTBYrD8WH8XhJ3qgqfIfjQdQgASwoLp0pNaVCZQKhYhFXqkcTjLlggBaObYLxsz0AZgAHABGEOe7CsViekIwCOcTi8aQwcaCd1egDsAE4sxmAGwAVgLQYALAXPQAvAsIBNp3gez3Z3OF4tlz3BNwlgCOuTrDab%2BaLpfLwUKXiQhT7Xp9fsWnrCACYQ1nPc5jB5PU14cEYGRsAxPYU4HQULiQPiQXAiSj097pLOvIHQ%2BHI9HY%2FHE8nUzRbwOW8PK2rWsf3rTMc0HVsR07Hsp0bcD%2FzbUdx0nECGxnf1F2XVc4HXOBN34eAdz3A8jxPHEBjPBB62vUAVhYC9CQABRwbYAAteCgII9geFgqNyFBBloJkaQoMZ%2BHpKYZGElk2WWTkQHtOUFTFfY8ClbleQdeUnRUnQVRuO5NTVXjqKUVjnCQdjOLQAtBMlI4SEUGhPnkdhRMhCYhHksRPAZKTqRTcQ9JKVV1XuPyKh8bBMhwVl6DQPMwiSsJ6iEYyQD4gSzyaEEyAEDAzwYq9kVo%2BS%2FBUCyPKQDZVgIdxEDgVgNgACgACQAIQ2AAlLguMajYAEFWAASlUw4iHKuIryqmq6uFRqlDwKB5A67reoapqhsuAbhV9Zh1E0KwXKIChsCQcwLJAQS6JARiqISLiBSgJNRQq6a6Ra1aBvMBoU34DZGLKFMGggFo0iQUaJTUhy7t4B6nX5Z6YFeqakCqxbcGWogvp%2Bv7OABoGIBBsGYHpXQdsQPa1A0LRnOE07zsu675J6pAGHEq9Ps62H4ZFVn2e4OBIZAeyiH5jn6QcLGWFWnnhCdcXBe23avH2mmjvpuAzou4rmaIZrmoAEmAdrhAB1lti5taomcTaRtqDYACoNhDZLkuGjYAHoNmNuXHsRl7Jsqj62s677fvGAmEGB0HotJ4bamF0WWB6txuqkXzjpYThsAoNnsG2ABZLXGcoPWWCN4Ag%2Fe8TZsteamtD62%2BrthOvZ94BFa0aqm79hWrwFrQE4953XbCMb1JAAA5OAYFyXgEEKDYuQWdP4CUYSc7zloi5LnWrspLz9eN6u0Y%2B2r642q2ept%2Fqhrb73ffu%2BWRQD5HT5mpvw7xqOY5JiHE5OxdklCeMNn6PRXvjLqGcN7Ui3gPAucBi7a36IfG6lcP7nzmlfJuN8W6DXtu3E%2BXJ2ohgBvyPwVtv6R0BtHImsdwbDyAWPUBRAACiO5EA5ygINXGkdIEAFJYHyHgfnXeKCy5oPkgbSupsmp3SJnAa%2B61bYELbp6DuegkgwEME6OR5tFHKNvq3QBo83ZJQ9o%2FYAfdX5IxRsHWuX8%2BH%2FVoX%2FOOACk7QyILDSAyNoHrzpnA3OCDxGlyumeLQy1fqNQAGoQDgL2C0CwlENFYkDQQDRtGGGQaXa8Z5TSNRyTrPJNBWJWl4FFMgqxyDIjPAvLi7UqgsEEPUxAbJzRsCvA0K6QA%3D%3D&showOthers=0&sya=1&tables=HB%20Rendered%20Ad%2CHB%20Auction%20Participants%2CHB%20Provider%20Response&timezone=Asia%2FKolkata"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3 Content -->
+        <div id="tab3" class="tab-pane">
+            <div class="nested-tabs">
+                <div class="nested-tabs-nav">
+                    <div class="nested-tab active" data-nested-tab="nested3-1">EAST_SC</div>
+                    <div class="nested-tab" data-nested-tab="nested3-2">WEST_OR</div>
+                    <div class="nested-tab" data-nested-tab="nested3-3">APAC_SG</div>
+                    <div class="nested-tab" data-nested-tab="nested3-4">EU_BE</div>
+                </div>
+                <div class="nested-tabs-content">
+                    <div id="nested3-1" class="nested-tab-pane active">
+                        <iframe src="https://samurai.access.mn/#/reporting/Header%20Bidder?bz=0&cs=gw&heatMapType=off&ia=0&il=0&iscum=0&isout=0&isst=0&ist=0&mkm=0&mopt=N4IgCgTg9gbglgEwKYQAQGUA2UAuqCSAtgA4RIDO5cUAduagBQASAQqgIICuAxjtTajABDCH25xiQmjnIBKEAC5QxRSGw0A5iAA0IGKoByOkAkUAmXUNWYkAMxwgAvo6A%3D%3D%3D&namespace=Header%20Bidder&pc=1&selection=N4IgZglgNgLgpgJwM4gFwG1RQIYCM5RogAqEAtnCADQgwCeADpaiACblwB2SEA9t9RARWRUhUGtsMbMUbNaHQfDIM0YbFCRwaEJAGFeZMvzQwEAV21sp2NKGm4iCAlIgA3SjQDmCBgElOVjgADzQABh1AkPCaBmc3PnN9XnNOGDROcygoGgB3ODgAawMVbGc7azoMrKgAXxoAY0MGMt1%2BWSYiSToSlvLa%2Bvs5Lo5uPgEaSWkO%2BSQzCE4vQWEiAHU4XAACAGVEDwRNv1UaHHxCFnWt3YR9w%2BOhZKMTVDNLSKJIWEQUSZsK%2Bk6LAWgk%2B8AQMyIUF06Umox4zxAlx2e0QdwkfwwIBAAF0aG4NJYUJicQNcSAELxckTMLRhix2BQxvwftZpnSQHMEAsljoRCwAHK8TYAIWEm2c2CQ%2FE2AAprrdtsI4ABKQSnAhEQUisUSqWcWXy1GKoKqnSPYycUwWKzAlgUqlKAAWziQjt4UD5AFYwoNaYC2HDxiypjJ2Zzucs%2BYiNsibqijmq8BqLjHDQcE2aSharW8hJa7ZSWTBnXBXe6vb6Vix8VBCQAFHANOBuj2IZb58mFkC%2B9XnEiKGgA%2BQMrjwiZCKNiTys0P%2BmADh5Z56vKwhio%2BbCZHBc%2BhoABsYUPPveBYdtTJTVrZAEGDJNcJaBpVZAdYpCSCB22UF4MEOKhdY5ILKAASwqbAAguYDTztKdZlPODQQC0aRIKaIC9kQr68O%2BRrfr%2Bfj%2FqWgFKHgUDyKBEFQTB%2BpwQgCFIZuMAsro4H7NgXjMOomhWEORAUJK5gut2ZJaGR0FwKwABqEBwLkkILHAmwNI68GCA0SQwIYACycACUJt40KCiASTpemlo%2BZKOtCvAbmQAAi5AWTQvAIB%2BwpVCwgguR%2B3IQvSpYNN2QA%3D%3D&showOthers=0&sya=1&tables=HB%20Auction%20Participants&timezone=Asia%2FKolkata"></iframe>
+                    </div>
+                    <div id="nested3-2" class="nested-tab-pane">
+                        <iframe src="https://samurai.access.mn/#/reporting/Header%20Bidder?bz=0&cs=gw&heatMapType=off&ia=0&il=0&iscum=0&isout=0&isst=0&ist=0&mkm=0&mopt=N4IgCgTg9gbglgEwKYQAQGUA2UAuqCSAtgA4RIDO5cUAduagBQASAQqgIICuAxjtTajABDCH25xiQmjnIBKEAC5QxRSGw0A5iAA0IGKoByOkAkUAmXUNWYkAMxwgAvo6A%3D%3D%3D&namespace=Header%20Bidder&pc=1&selection=N4IgZglgNgLgpgJwM4gFwG1RQIYCM5RogAqEAtnCADQgwCeADpaiACblwB2SEA9t9RARWRUhUGtsMbMUbNaHQfDIM0YbFCRwaEJAGFeZMvzQwEAV21sp2NKGm4iCAlIgA3SjQDmCBgElOVjgADzQABh1AkPCaBmc3PnN9XnNOGDROcygoGgB3ODgAawMVbGc7azoMrKgAXxoAY0MGMt1%2BWSYiSToSlvLa%2Bvs5Lo5uPgEaSWkO%2BSQzCE4vQWEiAHU4XAACAGVEDwRNv1UaHHxCFnWt3YR9w%2BOhZKMTVDNLSKJIWEQUSZsK%2Bk6LAWgk%2B8AQMyIUF06Umox4zxAlx2e0QdwkfwwIBAAF0aG4NJYUJicQNcSAELxckTMLRhix2BQxvwftZpnSQHMEAsljoRCwAHK8TYAIWEm2c2CQ%2FE2AAprrdtsI4ABKQSnAhEQUisUSqWcWXy1GKoKqnSPYycUwWKzAlgUqlKAAWziQjt4UD5AFYwoNaYC2HDxiypjJ2Zzucs%2BYiNsibqijmq8BqLjHDQcE2aSharW8hJa7ZSWTBnXBXe6vb6Vix8VBCQAFHANOBuj2IZb58mFkC%2B9XnEiKGgA%2BQMrjwiZCKNiTys0P%2BmADh5Z56vKwhio%2BbCZHBc%2BhoABsYUPPveBYdtTJTVrZAEGDJNcJaBpVZAdYpCSCB22UF4MEOKhdY5ILKAASwqbAAguYDTztKdZlPODQQC0aRIKaIC9kQr68O%2BRrfr%2Bfj%2FqWgFKHgUDyKBEFQTB%2BpwQgCFIZuMAsro4H7NgXjMOomhWEORAUJK5gut2ZJaGR0FwKwABqEBwLkkILHAmwNI68GCA0SQwIYACycACUJt40KCiASTpemlo%2BZKOtCvAbmQAAi5AWTQvAIB%2BwpVCwgguR%2B3IQvSpYNN2QA%3D%3D&showOthers=0&sya=1&tables=HB%20Auction%20Participants&timezone=Asia%2FKolkata"></iframe>
+                    </div>
+                    <div id="nested3-3" class="nested-tab-pane">
+                        <iframe src="https://samurai.access.mn/#/reporting/Header%20Bidder?bz=0&cs=gw&heatMapType=off&ia=0&il=0&iscum=0&isout=0&isst=0&ist=0&mkm=0&mopt=N4IgCgTg9gbglgEwKYQAQGUA2UAuqCSAtgA4RIDO5cUAduagBQASAQqgIICuAxjtTajABDCH25xiQmjnIBKEAC5QxRSGw0A5iAA0IGKoByOkAkUAmXUNWYkAMxwgAvo6A%3D%3D%3D&namespace=Header%20Bidder&pc=1&selection=N4IgZglgNgLgpgJwM4gFwG1RQIYCM5RogAqEAtnCADQgwCeADpaiACblwB2SEA9t9RARWRUhUGtsMbMUbNaHQfDIM0YbFCRwaEJAGFeZMvzQwEAV21sp2NKGm4iCAlIgA3SjQDmCBgElOVjgADzQABh1AkPCaBmc3PnN9XnNOGDROcygoGgB3ODgAawMVbGc7azoMrKgAXxoAY0MGMt1%2BWSYiSToSlvLa%2Bvs5Lo5uPgEaSWkO%2BSQzCE4vQWEiAHU4XAACAGVEDwRNv1UaHHxCFnWt3YR9w%2BOhZKMTVDNLSKJIWEQUSZsK%2Bk6LAWgk%2B8AQMyIUF06Umox4zxAlx2e0QdwkfwwIBAAF0aG4NJYUJicQNcSAELxckTMLRhix2BQxvwftZpnSQHMEAsljoRCwAHK8TYAIWEm2c2CQ%2FE2AAprrdtsI4ABKQSnAhEQUisUSqWcWXy1GKoKqnSPYycUwWKzAlgUqlKAAWziQjt4UD5AFYwoNaYC2HDxiypjJ2Zzucs%2BYiNsibqijmq8BqLjHDQcE2aSharW8hJa7ZSWTBnXBXe6vb6Vix8VBCQAFHANOBuj2IZb58mFkC%2B9XnEiKGgA%2BQMrjwiZCKNiTys0P%2BmADh5Z56vKwhio%2BbCZHBc%2BhoABsYUPPveBYdtTJTVrZAEGDJNcJaBpVZAdYpCSCB22UF4MEOKhdY5ILKAASwqbAAguYDTztKdZlPODQQC0aRIKaIC9kQr68O%2BRrfr%2Bfj%2FqWgFKHgUDyKBEFQTB%2BpwQgCFIZuMAsro4H7NgXjMOomhWEORAUJK5gut2ZJaGR0FwKwABqEBwLkkILHAmwNI68GCA0SQwIYACycACUJt40KCiASTpemlo%2BZKOtCvAbmQAAi5AWTQvAIB%2BwpVCwgguR%2B3IQvSpYNN2QA%3D%3D&showOthers=0&sya=1&tables=HB%20Auction%20Participants&timezone=Asia%2FKolkata"></iframe>
+                    </div>
+                    <div id="nested3-4" class="nested-tab-pane">
+                        <iframe src="https://samurai.access.mn/#/reporting/Header%20Bidder?bz=0&cs=gw&heatMapType=off&ia=0&il=0&iscum=0&isout=0&isst=0&ist=0&mkm=0&mopt=N4IgCgTg9gbglgEwKYQAQGUA2UAuqCSAtgA4RIDO5cUAduagBQASAQqgIICuAxjtTajABDCH25xiQmjnIBKEAC5QxRSGw0A5iAA0IGKoByOkAkUAmXUNWYkAMxwgAvo6A%3D%3D%3D&namespace=Header%20Bidder&pc=1&selection=N4IgZglgNgLgpgJwM4gFwG1RQIYCM5RogAqEAtnCADQgwCeADpaiACblwB2SEA9t9RARWRUhUGtsMbMUbNaHQfDIM0YbFCRwaEJAGFeZMvzQwEAV21sp2NKGm4iCAlIgA3SjQDmCBgElOVjgADzQABh1AkPCaBmc3PnN9XnNOGDROcygoGgB3ODgAawMVbGc7azoMrKgAXxoAY0MGMt1%2BWSYiSToSlvLa%2Bvs5Lo5uPgEaSWkO%2BSQzCE4vQWEiAHU4XAACAGVEDwRNv1UaHHxCFnWt3YR9w%2BOhZKMTVDNLSKJIWEQUSZsK%2Bk6LAWgk%2B8AQMyIUF06Umox4zxAlx2e0QdwkfwwIBAAF0aG4NJYUJicQNcSAELxckTMLRhix2BQxvwftZpnSQHMEAsljoRCwAHK8TYAIWEm2c2CQ%2FE2AAprrdtsI4ABKQSnAhEQUisUSqWcWXy1GKoKqnSPYycUwWKzAlgUqlKAAWziQjt4UD5AFYwoNaYC2HDxiypjJ2Zzucs%2BYiNsibqijmq8BqLjHDQcE2aSharW8hJa7ZSWTBnXBXe6vb6Vix8VBCQAFHANOBuj2IZb58mFkC%2B9XnEiKGgA%2BQMrjwiZCKNiTys0P%2BmADh5Z56vKwhio%2BbCZHBc%2BhoABsYUPPveBYdtTJTVrZAEGDJNcJaBpVZAdYpCSCB22UF4MEOKhdY5ILKAASwqbAAguYDTztKdZlPODQQC0aRIKaIC9kQr68O%2BRrfr%2Bfj%2FqWgFKHgUDyKBEFQTB%2BpwQgCFIZuMAsro4H7NgXjMOomhWEORAUJK5gut2ZJaGR0FwKwABqEBwLkkILHAmwNI68GCA0SQwIYACycACUJt40KCiASTpemlo%2BZKOtCvAbmQAAi5AWTQvAIB%2BwpVCwgguR%2B3IQvSpYNN2QA%3D%3D&showOthers=0&sya=1&tables=HB%20Auction%20Participants&timezone=Asia%2FKolkata"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 4 Content -->
+        <div id="tab4" class="tab-pane">
+            <div class="nested-tabs">
+                <div class="nested-tabs-nav">
+                    <div class="nested-tab active" data-nested-tab="nested4-1">Pods Name Parser</div>
+                    <div class="nested-tab" data-nested-tab="nested4-2">Sanity Checker</div>
+                    <div class="nested-tab" data-nested-tab="nested4-3">Links</div>
+                    <div class="nested-tab" data-nested-tab="nested4-4">To be added</div>
+                </div>
+                <div class="nested-tabs-content">
+                    <div id="nested4-1" class="nested-tab-pane active">
+                        <textarea
+                        placeholder="│     ├──□ mowx-8b989c4c9-rchbr  Pod         ✔ Running     67m     ready:3/3
+│     ├──□ mowx-8b989c4c9-zjc8b  Pod         ✔ Running     67m     ready:3/3
+│     ├──□ mowx-8b989c4c9-2jjft  Pod         ✔ Running     67m     ready:3/3
+│     ├──□ mowx-8b989c4c9-4j5bj  Pod         ✔ Running     67m     ready:3/3
+│     ├──□ mowx-8b989c4c9-7bmcb  Pod         ✔ Running     67m     ready:3/3
+│     ├──□ mowx-8b989c4c9-g9xhh  Pod         ✔ Running     67m     ready:3/3"
+                        class="textarea"
+                      ></textarea>
+                      <button class="button" onclick="extractPodNames()">Extract Pod Info</button>
+                      <textarea
+                        id="podsOutput"
+                        readonly
+                        class="textarea"
+                      ></textarea>
+                    </div>
+                    <div id="nested4-2" class="nested-tab-pane">
+                        <iframe src="https://vaibhavkhandare.github.io/Sanity_checker/"></iframe>
+                    </div>
+                    <div id="nested4-3" class="nested-tab-pane">
+                        <div className="flex items-center justify-center h-[1g000px] bg-gray-100">
+                            <div className="bg-white p-8 rounded shadow-lg">
+                              <ol className="relative border-s border-gray-200 dark:border-gray-700 w-[400px]">
+                                <li className="mb-10 ms-6">
+                                  <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+                                    
+                                  </span>
+                                  <h3 className="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
+                                    <a
+                                      href="http://tree.mn/Video-AdExchange/ad-exchange/-/tags"
+                                      target="_blank"
+                                    >
+                                      Create New Tag
+                                    </a>
+                                  </h3>
+                                  <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                                    Create a new Tag, oldTag + 1
+                                  </p>
+                                </li>
+                                <li className="mb-10 ms-6">
+                                  <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+                                    
+                                  </span>
+                                  <h3 className="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
+                                    <a
+                                      href="http://ci.internal.media.net/job/mowx/job/mowx-deploy-pipeline/"
+                                      target="_blank"
+                                    >
+                                      Deploy Pipeline
+                                    </a>
+                                  </h3>
+                                  <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                                    
+                                    Deploy the Tag
+                                    
+                                  </p>
+                                </li>
+                                <li className="mb-10 ms-6">
+                                  <span className="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+                                    
+                                  </span>
+                                  <h3 className="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
+                                    <a
+                                      href="http://ci.internal.media.net/job/ProgrammaticBuying/job/ssx/job/EBDA/job/mowx-sanity-x/"
+                                      target="_blank"
+                                    >
+                                      Sanity X
+                                    </a>
+                                  </h3>
+                                  <p className="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+                                    Check Tag on Sanity
+                                  </p>
+                                </li>
+                              </ol>
+                            </div>
+                          </div>
+                    </div>
+                    <div id="nested4-4" class="nested-tab-pane">
+                        To be added
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            // Hide all tab content
+            document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+            
+            // Set clicked tab as active
+            tab.classList.add('active');
+            // Show content for the active tab
+            document.getElementById(tab.getAttribute('data-tab')).classList.add('active');
+        });
+    });
+
+    document.querySelectorAll('.nested-tab').forEach(nestedTab => {
+        nestedTab.addEventListener('click', () => {
+            // Remove active class from all nested tabs
+            document.querySelectorAll('.nested-tab').forEach(t => t.classList.remove('active'));
+            // Hide all nested tab content
+            document.querySelectorAll('.nested-tab-pane').forEach(pane => pane.classList.remove('active'));
+            
+            // Set clicked nested tab as active
+            nestedTab.classList.add('active');
+            // Show content for the active nested tab
+            document.getElementById(nestedTab.getAttribute('data-nested-tab')).classList.add('active');
+        });
+    });
+
+    function extractPodNames() {
+      const text = document.querySelector('.textarea').value;
+      const regex = /mowx-\w+-\w+/g;
+      const matches = text.match(regex) || [""];
+      document.getElementById('podsOutput').value = matches.join("\n");
+    }
+</script>
+
+</body>
+</html>
